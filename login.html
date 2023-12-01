@@ -20,7 +20,7 @@
 
             <div class="navbar-end">
                 <!-- <a class="btn bg-transparent border-none text-white mr-20">Signup</a> -->
-                <a href="register.html" class="bg-transparent border-none text-white mr-20">Signup</a>
+                <a href="index.html" class="bg-transparent border-none text-white mr-20 ">Signup</a>
             </div>
         </div>
         <!-- navbar ended -->
@@ -34,13 +34,13 @@
 
         <div class="bg-gray-100 min-h-screen flex items-center justify-center">
             <div class="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
-                <form>
-                    <div class="mb-4 flex justify-center">
-                        <input type="text" placeholder="Email"
+                <form id="login-form">
+                    <div  class="mb-4 flex justify-center">
+                        <input id="email" type="text" placeholder="Email"
                             class="w-3/4 px-3 py-2 border rounded-md placeholder:text-lg outline-[#7749F8] shadow-md shadow-indigo-500/50">
                     </div>
-                    <div class="mb-4 flex justify-center">
-                        <input type="password" placeholder="Password"
+                    <div  class="mb-4 flex justify-center">
+                        <input id="password" type="password" placeholder="Password"
                             class="w-3/4 px-3 py-2 border rounded-md placeholder:text-lg outline-[#7749F8] shadow-md shadow-indigo-500/50">
                     </div>
                     <div class="flex justify-center">
@@ -49,10 +49,21 @@
                 </form>
             </div>
         </div>
+        <dialog id="my_modal_1" class="modal">
+            <div class="modal-box">
+                <h3 class="font-bold text-lg">Hello!</h3>
+                <p class="py-4" id="modal-message">Password are not same</p>
+                <div class="modal-action">
+                    <form method="dialog">
+                        <button class="btn">Close</button>
+                    </form>
+                </div>
+            </div>
+        </dialog>
 
 
     </div>
-
+<script type="module" src="./script/login.js"></script>
 </body>
 
 </html>
