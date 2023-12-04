@@ -9,6 +9,7 @@ const password = document.querySelector('#password');
 onAuthStateChanged(auth, (user) => {
     if (user) {
         window.location.href = 'dashboard.html';
+        return
     }
 });
 

@@ -15,12 +15,30 @@
     <div>
         <!-- navbar started -->
         <div class="navbar bg-[#7749F8]">
-            <div class="navbar-start">
-                <a class=" text-xl text-white ml-20">Personal Blogging App</a>
+            <div class="flex-1">
+                <a class="text-xl text-white font-semibold">Personal Blogging App</a>
             </div>
-
-            <div class="navbar-end">
-                <a href="login.html" class=" bg-transparent border-none text-white mr-20">Logout</a>
+            <div class="flex-none gap-2">
+                <h4 class="text-base text-white font-semibold" id="username"></h4>
+                <div class="dropdown dropdown-end">
+                    <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                        <div class="w-10 rounded-full">
+                            <img alt="userImage" src="" id="userimg" />
+                        </div>
+                    </div>
+                    <ul tabindex="0"
+                        class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                        <li>
+                            <a class="justify-between" href="./dashboard.html">
+                                Dashboard
+                                <span class="badge">New</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <!-- navbar ended -->
@@ -34,32 +52,45 @@
 
         <div class="bg-gray-100 min-h-screen flex items-center justify-center">
             <div class="bg-white p-8 rounded-lg shadow-md max-w-xl w-full">
-                <form>
+                <form id="passwordUpdateForm" class="password-update-form">
                     <div class="mb-4 text-center">
-                        <img src="./assets/download.jfif" alt="inzamam malik" class="rounded-xl w-40 h-40 mb-4">
+                        <img src="" alt="" id="profileImg" class="rounded-xl w-40 h-40 mb-4">
                     </div>
-                    <h2 class="font-bold text-xl text-left mb-2">Inzamam Malik <i class="fa-solid fa-marker text-sm ml-2"></i></h2>
+                    <h2 class="font-bold text-xl text-left mb-2" id="name"> </h2>
                     <h2 class="font-bold text-xl text-left mb-6">Change Password</h2>
                     <div class="mb-4">
-                        <input type="password" placeholder="Old password" class="w-1/2 px-3 py-2 border rounded-md placeholder:text-lg outline-[#7749F8] shadow-md shadow-indigo-500/50">
+                        <input id="password" type="password" placeholder="Old password"
+                            class="w-1/2 px-3 py-2 border rounded-md placeholder:text-lg outline-[#7749F8] shadow-md shadow-indigo-500/50"
+                            required minlength="8">
                     </div>
                     <div class="mb-4">
-                        <input type="password" placeholder="New Password" class="w-1/2 px-3 py-2 border rounded-md placeholder:text-lg outline-[#7749F8] shadow-md shadow-indigo-500/50">
+                        <input id="new-password" type="password" placeholder="New Password"
+                            class="w-1/2 px-3 py-2 border rounded-md placeholder:text-lg outline-[#7749F8] shadow-md shadow-indigo-500/50"
+                            required minlength="8">
                     </div>
                     <div class="mb-6">
-                        <input type="password" placeholder="Repeat Password" class="w-1/2 px-3 py-2 border rounded-md placeholder:text-lg outline-[#7749F8] shadow-md shadow-indigo-500/50">
+                        <input id="repeat-password" type="password" placeholder="Repeat Password"
+                            class="w-1/2 px-3 py-2 border rounded-md placeholder:text-lg outline-[#7749F8] shadow-md shadow-indigo-500/50"
+                            required minlength="8">
                     </div>
                     <div class="flex justify-start">
-                        <button type="submit" class="bg-[#7749F8] shadow-xl shadow-indigo-500/50 text-white py-2 px-3 rounded-md">Update Password</button>
-                        
+                        <button type="submit"
+                            class="bg-[#7749F8] shadow-xl shadow-indigo-500/50 text-white py-2 px-3 rounded-md">Update
+                            Password</button>
+
                     </div>
                 </form>
             </div>
         </div>
 
 
-    </div>
+        
 
+
+    </div>
+    <script type="module" src="./script/profile.js"></script>
 </body>
 
 </html>
+
+<!-- <i class="fa-solid fa-marker text-sm ml-2"></i> -->
