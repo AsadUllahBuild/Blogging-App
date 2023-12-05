@@ -11,45 +11,30 @@
 </head>
 <body>
     <div>
-         <!-- navbar started -->
-         <div class="navbar bg-[#7749F8]">
+        <!-- Navbar -->
+        <div class="navbar bg-[#7749F8]">
             <div class="navbar-start">
-                <a class=" text-xl text-white ml-10">Personal Blogging App</a>
+                <a class="text-xl text-white ml-10">Personal Blogging App</a>
             </div>
 
             <div class="navbar-end">
-                <a href="login.html" class=" bg-transparent border-none text-white mr-10">Login</a>
+                <a href="login.html" class="bg-transparent border-none text-white mr-10">Login</a>
             </div>
         </div>
-        <!-- navbar ended -->
 
-
-        <!-- header started -->
+        <!-- Header -->
         <div class="header bg-[#fff] p-6">
-            <header class="ml-20 text-3xl font-bold" id="time"></header>
+            <a href="./index.html" class="ml-20 text-3xl text-[#7749F8] font-bold">&lt; Back to all blogs</a>
         </div>
-        <!-- header ended -->
 
-        <div class="bg-gray-100 min-h-full flex flex-col">
-            <h2 class="ml-40 mt-6 mb-4 font-bold text-2xl">All Blogs</h2>
-            
-            <div id="AllBlogsContainer">
-
+        <div class="bg-gray-100 min-h-screen flex flex-col">
+            <h2 class="ml-40 mt-6 mb-4 font-bold text-2xl" id="userName">All from</h2>
+            <div class="user-blogs-container">
+                <!-- User blogs will be displayed here -->
             </div>
-
-
-
         </div>
-
-
-
-
-
-
-
-
     </div>
-    <script type="module" src="./script/home.js"></script>
+
+    <script type="module" src="./script/userblog.js"></script>
 </body>
 </html>
-
