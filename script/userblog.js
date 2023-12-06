@@ -2,7 +2,6 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.10.0/fi
 import { collection, addDoc, Timestamp, getDocs, where, query, orderBy, deleteDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 import { auth, db } from './config.js';
 
-// Fetch user-specific blogs from the database
 const fetchUserBlogs = async (userId) => {
     try {
         const userBlogs = [];
@@ -26,25 +25,16 @@ const fetchUserBlogs = async (userId) => {
 };
 
 
-
-// Function to display user-specific blogs
 const displayUserBlogs = async (userId) => {
     try {
-        // Fetch blogs associated with the given userId from your database
         const userBlogs = await fetchUserBlogs(userId);
-
-        // Access your DOM elements
         const blogsContainer = document.querySelector('.user-blogs-container');
-
-        // Clear the previous content in case of multiple clicks
         blogsContainer.innerHTML = '';
-
-        // Loop through the userBlogs array and display each blog
         userBlogs.forEach((blog) => {
-            const { title, description } = blog; // Assuming these properties exist in your blog object
+            const { title, description } = blog;
 
             const blogElement = document.createElement('div');
-            blogElement.classList.add('blog-item'); // Add your CSS class here
+            blogElement.classList.add('blog-item');
 
             blogElement.innerHTML = `
                 <div class="flex gap-5">
@@ -59,16 +49,12 @@ const displayUserBlogs = async (userId) => {
                 </div>
                 <p class="text-[#6C757D] text-sm mt-3 whitespace-normal break-words">${description}</p>
             `;
-
-            // Append each blog to the blogsContainer
             blogsContainer.appendChild(blogElement);
         });
     } catch (error) {
         console.error('Error fetching user blogs:', error);
     }
 };
-
-// Mock implementation to update the user's name when a user link is clicked
 const updateUserName = (userName) => {
     const userFullNameElement = document.getElementById('userName');
     userFullNameElement.textContent = `All from ${userName}`;
