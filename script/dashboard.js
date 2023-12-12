@@ -10,6 +10,7 @@ const logout = document.querySelector('#logout');
 const profileImage = document.querySelector('#profileImage');
 const username = document.querySelector('#username');
 const blogImg = document.querySelector("#blog-img");
+const modal = document.querySelector('#modal');
 
 logout.addEventListener('click', () => {
   signOut(auth).then(() => {
@@ -168,11 +169,14 @@ async function getdatafromfirestore(uid) {
 
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
+  
   const postTitle = title.value.trim();
   const postDescription = description.value.trim();
+  modal.showModal();
 
   if (postTitle === '' || postDescription === '') {
     alert('Please fill in both title and description.');
+    modal.close();
   } else {
     try {
       const user = auth.currentUser;
@@ -189,11 +193,15 @@ form.addEventListener('submit', async (event) => {
       console.log(arr);
       title.value = '';
       description.value = '';
+
       renderPost();
+      modal.close();
     } catch (error) {
       console.error("Error adding document: ", error);
+      modal.close();
     }
   }
 });
+
 
 

@@ -17,14 +17,19 @@ const renderAllBlogs = async () => {
     const usersData = (await getDocs(collection(db, "users"))).docs.map(user => user.data());
     const postsData = (await getDocs(collection(db, "posts"))).docs.map(post => ({ ...post.data(), docId: post.id }));
 
-    postsData.forEach(async item => {
-        const user = usersData.find(user => user.uid === item.uid);
-        const postTime = new Date(item.postDate.seconds * 1000).toLocaleDateString('en-US', {
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric'
-        });
-        const postImg = user ? user.profileUrl : '';
+postsData.forEach(async item => {
+    const user = usersData.find(userData => userData.uid === item.uid);
+    const postTime = new Date(item.postDate.seconds * 1000).toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+    });
+    
+    let postImg = '';
+    
+    if (user) {
+        postImg = user.profileUrl || '';
+    }
 
         const blogHTML = `
             <div class="bg-white p-8 rounded-lg mb-5 shadow-2xl max-w-xl ml-40 w-full">
@@ -39,11 +44,11 @@ const renderAllBlogs = async () => {
                 </div>
                 <p class="text-[#6C757D] text-sm mt-3 whitespace-normal break-words">${item.description}</p>
                 <div class="flex mt-3 text-sm">
-                    <a href="userblog.html" class="bg-transparent border-none text-[#7749F8]  mr-20" id="user-link">See all from this user</a>
+                    <a href="userblog.html?uid=${user.uid}" class="bg-transparent border-none text-[#7749F8]  mr-20" id="user-link">See all from this user</a>
                 </div>
             </div> `;
-        document.querySelector('#AllBlogsContainer').innerHTML += blogHTML;
-    });
+            document.querySelector('#AllBlogsContainer').innerHTML += blogHTML;
+});
 };
 
 document.addEventListener("DOMContentLoaded", async () => {

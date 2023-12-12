@@ -10,14 +10,16 @@ const email = document.querySelector('#email');
 const password = document.querySelector('#password');
 const repeatPassword = document.querySelector('#repeat-password');
 const uploadPhoto = document.querySelector('#upload-photo');
-const modalMessage = document.querySelector('#modal-message');
+const modal = document.querySelector('#modal');
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
+    modal.showModal();
+
     if (password.value !== repeatPassword.value) {
         console.log('Passwords do not match');
-        modalMessage.innerHTML = 'Passwords do not match';
+        
         return;
     }
 

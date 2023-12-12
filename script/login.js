@@ -5,6 +5,8 @@ const modalMessage = document.querySelector('#modal-message');
 const form = document.querySelector('#login-form');
 const email = document.querySelector('#email');
 const password = document.querySelector('#password');
+const modal = document.querySelector('#modal');
+
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -15,6 +17,7 @@ onAuthStateChanged(auth, (user) => {
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
+    modal.showModal();
     signInWithEmailAndPassword(auth, email.value, password.value)
         .then((userCredential) => {
             const user = userCredential.user;
@@ -24,7 +27,7 @@ form.addEventListener('submit', (event) => {
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            modalMessage.innerHTML = 'Invalid login credentials';
+            modalMessage.innerHTML = 'Password not correct';
             my_modal_1.showModal();
         });
 });

@@ -10,7 +10,7 @@ const profileImage = document.querySelector('#profileImg');
 logout.addEventListener("click", () => {
     signOut(auth)
         .then(() => {
-            window.location='./login.html';
+            window.location='./index.html';
         })
         .catch((error) => {
             console.log(error);
@@ -28,7 +28,7 @@ onAuthStateChanged(auth, async (user) => {
             profileImage.src = `${doc.data().profileUrl}`;
         });
     } else {
-        window.location = 'login.html';
+        window.location = 'index.html';
     }
 });
 
