@@ -6,16 +6,16 @@ const logout = document.querySelector('#logout');
 const userImg = document.querySelector('#userimg');
 const username = document.querySelector('#name');
 const profileImage = document.querySelector('#profileImg');
+const modal = document.querySelector('#modal');
 
-logout.addEventListener("click", () => {
-    signOut(auth)
-        .then(() => {
-            window.location='./index.html';
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-});
+logout.addEventListener('click', () => {
+    signOut(auth).then(() => {
+      window.location = './index.html'
+    }).catch((error) => {
+      console.log(error);
+    });
+  })
+  
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
@@ -41,10 +41,14 @@ form.addEventListener('submit', async (e) => {
     const currentPassword = document.querySelector('#password').value;
     const newPasswordValue = document.querySelector('#new-password').value;
     const repeatPasswordValue = document.querySelector('#repeat-password').value;
+    modal.showModal();
 
     if (newPasswordValue !== repeatPasswordValue) {
         console.log("New passwords do not match");
+        modal.close();
         return;
+        
+        
     }
 
     try {
@@ -58,8 +62,10 @@ form.addEventListener('submit', async (e) => {
         document.querySelector('#password').value = '';
         document.querySelector('#new-password').value = '';
         document.querySelector('#repeat-password').value = '';
+        modal.close();
     } catch (error) {
         console.error(error.message);
+        modal.close();
     }
 });
 

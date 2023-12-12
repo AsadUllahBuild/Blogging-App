@@ -22,8 +22,11 @@
                 <h4 class="text-base text-white font-semibold" id="username"></h4>
                 <div class="dropdown dropdown-end">
                     <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-                        <div class="w-10 rounded-full">
-                            <img alt="userImage" src="" id="userimg" />
+
+                        <div class="avatar online">
+                            <div class="w-11 rounded-full">
+                                <img alt="userImage" src="" id="userimg" />
+                            </div>
                         </div>
                     </div>
                     <ul tabindex="0"
@@ -32,6 +35,7 @@
                             <a class="justify-between" href="./dashboard.html">
                                 Dashboard
                                 <span class="badge">New</span>
+
                             </a>
                         </li>
                         <li>
@@ -54,7 +58,8 @@
             <div class="bg-white p-8 rounded-lg shadow-md max-w-xl w-full">
                 <form id="passwordUpdateForm" class="password-update-form">
                     <div class="mb-4 text-center">
-                        <img src="" alt="" id="profileImg" class="rounded-full w-40 h-40 mb-4 outline-[#7749F8] shadow-md shadow-indigo-500/50">
+                        <img src="" alt="" id="profileImg"
+                            class="rounded-full w-40 h-40 mb-4 outline-[#7749F8] shadow-md shadow-indigo-500/50">
                     </div>
                     <h2 class="font-bold text-xl text-left mb-2" id="name"> </h2>
                     <h2 class="font-bold text-xl text-left mb-6">Change Password</h2>
@@ -82,9 +87,26 @@
                 </form>
             </div>
         </div>
+        <div>
+            <dialog id="modal" class="modal">
+                <span class="loading loading-spinner text-primary"></span>
+            </dialog>
+        </div>
+        <dialog id="my_modal_1" class="modal">
+            <div class="modal-box">
+              <h3 class="font-bold text-lg">Hello!</h3>
+              <p class="py-4">Press ESC key or click the button below to close</p>
+              <div class="modal-action">
+                <form method="dialog">
+                  <!-- if there is a button in form, it will close the modal -->
+                  <button class="btn">Close</button>
+                </form>
+              </div>
+            </div>
+          </dialog>
 
 
-        
+
 
 
     </div>
