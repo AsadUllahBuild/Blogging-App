@@ -1,4 +1,4 @@
-import { signOut, onAuthStateChanged, updateProfile, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+import { signOut, onAuthStateChanged, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
 import { collection, getDocs, where, query } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 import { auth, db } from './config.js';
 
@@ -6,15 +6,15 @@ const logout = document.querySelector('#logout');
 const userImg = document.querySelector('#userimg');
 const username = document.querySelector('#name');
 const profileImage = document.querySelector('#profileImg');
+const modal = document.querySelector('#modal');
+const modalMessage = document.querySelector('#modal-message');
 
-logout.addEventListener("click", () => {
-    signOut(auth)
-        .then(() => {
-            window.location='./login.html';
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+logout.addEventListener('click', () => {
+    signOut(auth).then(() => {
+        window.location = './index.html';
+    }).catch((error) => {
+        console.log(error);
+    });
 });
 
 onAuthStateChanged(auth, async (user) => {
@@ -28,11 +28,13 @@ onAuthStateChanged(auth, async (user) => {
             profileImage.src = `${doc.data().profileUrl}`;
         });
     } else {
-        window.location = 'login.html';
+        window.location = 'index.html';
     }
 });
 
 const form = document.querySelector("#passwordUpdateForm");
+const mismatchModal = document.querySelector("#passwordMismatchModal");
+const closeMismatchModal = document.querySelector("#closePasswordMismatchModal");
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -41,9 +43,14 @@ form.addEventListener('submit', async (e) => {
     const currentPassword = document.querySelector('#password').value;
     const newPasswordValue = document.querySelector('#new-password').value;
     const repeatPasswordValue = document.querySelector('#repeat-password').value;
+    const modal = document.querySelector('#modal');
+
+    modal.showModal();
 
     if (newPasswordValue !== repeatPasswordValue) {
-        console.log("New passwords do not match");
+        console.log("New and repeated passwords do not match");
+        mismatchModal.showModal();
+        modal.close();
         return;
     }
 
@@ -58,11 +65,18 @@ form.addEventListener('submit', async (e) => {
         document.querySelector('#password').value = '';
         document.querySelector('#new-password').value = '';
         document.querySelector('#repeat-password').value = '';
+
+        modalMessage.innerHTML = 'Password Updated Successfully';
+        const successModal = document.querySelector('#my_modal_1');
+        successModal.showModal();
+        modal.close();
+
     } catch (error) {
         console.error(error.message);
+        modal.close();
     }
 });
-
-
-
+closeMismatchModal.addEventListener('click', () => {
+    mismatchModal.close();
+});
 

@@ -22,8 +22,11 @@
                 <h4 class="text-base text-white font-semibold" id="username"></h4>
                 <div class="dropdown dropdown-end">
                     <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-                        <div class="w-10 rounded-full">
-                            <img alt="userImage" src="" id="profileImage" />
+
+                        <div class="avatar online">
+                            <div class="w-11 rounded-full">
+                                <img alt="userImage" src="" id="profileImage" />
+                            </div>
                         </div>
                     </div>
                     <ul tabindex="0"
@@ -78,9 +81,31 @@
 
             </div>
 
-            
-                
-            
+            <!-- loader modal -->
+
+            <div>
+                <dialog id="modal" class="modal">
+                    <span class="loading loading-spinner text-primary"></span>
+                </dialog>
+            </div>
+
+            <!-- Blogs published -->
+
+            <dialog id="my_modal_1" class="modal">
+                <div class="modal-box">
+                    <h3 class="font-bold text-lg">Success!</h3>
+                    <p class="py-4" id="modal-message">Blog Published</p>
+                    <div class="modal-action">
+                        <form method="dialog">
+                            <button class="btn">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
+
+
+
+
 
 
         </div>

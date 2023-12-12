@@ -10,6 +10,8 @@ const logout = document.querySelector('#logout');
 const profileImage = document.querySelector('#profileImage');
 const username = document.querySelector('#username');
 const blogImg = document.querySelector("#blog-img");
+const modal = document.querySelector('#modal');
+const modalMessage = document.querySelector('#modal-message');
 
 logout.addEventListener('click', () => {
   signOut(auth).then(() => {
@@ -66,7 +68,7 @@ function renderPost() {
            <img src="${img}" class="rounded-xl w-20 h-20 mb-4" id="blog-img">
        </div >
 <div class="w-1/2">
-<h2 class="text-xl font-bold text-[#212529]">${item.title}
+<h2 class="text-xl font-bold text-[#212529] whitespace-normal break-words">${item.title}
 </h2>
 <h5 class="text-sm mt-1 text-[#6C757D]">${idNames} ${formattedDate}</h5>
 </div>
@@ -168,8 +170,13 @@ async function getdatafromfirestore(uid) {
 
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
+
   const postTitle = title.value.trim();
   const postDescription = description.value.trim();
+  modal.showModal();
+  modalMessage.innerHTML = 'Blog Published';
+  const successModal = document.querySelector('#my_modal_1');
+  successModal.showModal();
 
   if (postTitle === '' || postDescription === '') {
     alert('Please fill in both title and description.');
@@ -189,11 +196,15 @@ form.addEventListener('submit', async (event) => {
       console.log(arr);
       title.value = '';
       description.value = '';
+
       renderPost();
+      modal.close();
     } catch (error) {
       console.error("Error adding document: ", error);
+      modal.close();
     }
   }
 });
+
 
 
