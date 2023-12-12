@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blogging App</title>
     <link rel="stylesheet" href="output.css">
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.8/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/da698ad306.js" crossorigin="anonymous"></script>
 </head>
@@ -87,26 +87,42 @@
                 </form>
             </div>
         </div>
+
+        <!-- loader modal -->
+
         <div>
             <dialog id="modal" class="modal">
                 <span class="loading loading-spinner text-primary"></span>
             </dialog>
         </div>
+
+        <!-- updated password modal -->
+
         <dialog id="my_modal_1" class="modal">
             <div class="modal-box">
-              <h3 class="font-bold text-lg">Hello!</h3>
-              <p class="py-4">Press ESC key or click the button below to close</p>
-              <div class="modal-action">
-                <form method="dialog">
-                  <!-- if there is a button in form, it will close the modal -->
-                  <button class="btn">Close</button>
-                </form>
-              </div>
+                <h3 class="font-bold text-lg">Success!</h3>
+                <p class="py-4" id="modal-message">Password Updated Successfully</p>
+                <div class="modal-action">
+                    <form method="dialog">
+                        <button class="btn">Close</button>
+                    </form>
+                </div>
             </div>
-          </dialog>
+        </dialog>
 
+        <!-- password not match modal -->
 
-
+        <dialog id="passwordMismatchModal" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box">
+                <h3 class="font-bold text-lg">Password Mismatch</h3>
+                <p class="py-4">New and repeated passwords do not match.</p>
+                <div class="modal-action">
+                    <form method="dialog">
+                        <button class="btn" id="closePasswordMismatchModal">Close</button>
+                    </form>
+                </div>
+            </div>
+        </dialog>
 
 
     </div>
