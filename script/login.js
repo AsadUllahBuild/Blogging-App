@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
 import { auth } from "./config.js";
 
 const modalMessage = document.querySelector('#modal-message');
@@ -8,12 +8,6 @@ const password = document.querySelector('#password');
 const modal = document.querySelector('#modal');
 
 
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        window.location.href = 'dashboard.html';
-        return
-    }
-});
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();

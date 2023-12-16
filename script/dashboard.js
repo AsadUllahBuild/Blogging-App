@@ -6,26 +6,35 @@ const mainContent = document.querySelector('#main-content')
 const form = document.querySelector('#dashboardForm');
 const title = document.querySelector('#title')
 const description = document.querySelector('#description');
-const logout = document.querySelector('#logout');
 const profileImage = document.querySelector('#profileImage');
 const username = document.querySelector('#username');
 const blogImg = document.querySelector("#blog-img");
 const modal = document.querySelector('#modal');
 const modalMessage = document.querySelector('#modal-message');
 
-logout.addEventListener('click', () => {
-  signOut(auth).then(() => {
-    window.location = './index.html'
-  }).catch((error) => {
-    console.log(error);
-  });
-})
+function handleLoginStatus(isLoggedIn) {
+  const loginButton = document.querySelector('#loginButton');
+  if (isLoggedIn) {
+    loginButton.textContent = 'Logout';
+    loginButton.addEventListener('click', () => {
+      signOut(auth).then(() => {
+        window.location.href = './index.html';
+      }).catch((error) => {
+        console.log(error);
+      });
+    });
+  } else {
+    loginButton.textContent = 'Login';
+    loginButton.href = 'login.html';
+  }
+}
 
 let img;
 let idNames;
 
 onAuthStateChanged(auth, async (user) => {
   if (user) {
+
     const uid = user.uid;
     const q = query(collection(db, "users"), where('uid', '==', uid));
     const querySnapshot = await getDocs(q);
@@ -34,10 +43,12 @@ onAuthStateChanged(auth, async (user) => {
       profileImage.src = doc.data().profileUrl
       img = doc.data().profileUrl
       idNames = `${doc.data().firstName} ${doc.data().lastName}`
-
+      
     });
     getdatafromfirestore(uid);
+    handleLoginStatus(true);
   } else {
+    handleLoginStatus(false);
     window.location = 'index.html';
   }
 });

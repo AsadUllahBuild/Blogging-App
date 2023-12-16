@@ -38,7 +38,7 @@ postsData.forEach(async item => {
                         <img src="${postImg}" class="rounded-xl w-20 h-20 mb-4" id="blog-img">
                     </div>
                     <div class="w-1/2">
-                        <h2 class="text-xl font-bold text-[#212529]">${item.title}</h2>
+                        <h2 class="text-xl font-bold text-[#212529] whitespace-normal break-words">${item.title}</h2>
                         <h5 class="text-sm mt-1 text-[#6C757D]">${user.firstName} ${user.lastName} ${postTime}</h5>
                     </div>
                 </div>
