@@ -6,8 +6,7 @@ const logout = document.querySelector('#logout');
 const userImg = document.querySelector('#userimg');
 const username = document.querySelector('#name');
 const profileImage = document.querySelector('#profileImg');
-const modal = document.querySelector('#modal');
-const modalMessage = document.querySelector('#modal-message');
+
 
 logout.addEventListener('click', () => {
     signOut(auth).then(() => {
@@ -33,8 +32,12 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 const form = document.querySelector("#passwordUpdateForm");
-const mismatchModal = document.querySelector("#passwordMismatchModal");
 const closeMismatchModal = document.querySelector("#closePasswordMismatchModal");
+const modal = document.querySelector('#modal');
+const mismatchModal = document.querySelector("#passwordMismatchModal");
+const oldPasswordModal = document.querySelector("#oldPasswordModal");
+const modalMessage = document.querySelector('#modalMessage');
+const closeOldPasswordModal = document.querySelector("#closeOldPasswordModal");
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -43,7 +46,6 @@ form.addEventListener('submit', async (e) => {
     const currentPassword = document.querySelector('#password').value;
     const newPasswordValue = document.querySelector('#new-password').value;
     const repeatPasswordValue = document.querySelector('#repeat-password').value;
-    const modal = document.querySelector('#modal');
 
     modal.showModal();
 
@@ -55,12 +57,10 @@ form.addEventListener('submit', async (e) => {
     }
 
     try {
-        const credentials = EmailAuthProvider.credential(
-            user.email,
-            currentPassword
-        );
+        const credentials = EmailAuthProvider.credential(user.email, currentPassword);
         await reauthenticateWithCredential(user, credentials);
         await updatePassword(user, newPasswordValue);
+
         console.log("Password updated successfully");
         document.querySelector('#password').value = '';
         document.querySelector('#new-password').value = '';
@@ -73,9 +73,19 @@ form.addEventListener('submit', async (e) => {
 
     } catch (error) {
         console.error(error.message);
+        oldPasswordModal.showModal();
+        console.log('Incorrect old password');
         modal.close();
+
+
     }
 });
+
+closeOldPasswordModal.addEventListener('click', () => {
+    oldPasswordModal.close();
+});
+
+
 closeMismatchModal.addEventListener('click', () => {
     mismatchModal.close();
 });
