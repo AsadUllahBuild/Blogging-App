@@ -1,6 +1,44 @@
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
 import { collection, addDoc, Timestamp, getDocs, where, query, orderBy, deleteDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 import { auth, db } from './config.js';
+
+document.addEventListener("DOMContentLoaded", () => {
+    const loginButton = document.getElementById('loginButton');
+    const logoutButton = document.getElementById('logoutButton');
+    const settingList = document.getElementById('settingList');
+
+    const toggleLoginLogout = (isLoggedIn) => {
+        if (isLoggedIn) {
+          loginButton.style.display = 'none';
+          logoutButton.style.display = 'block';
+        } else {
+          loginButton.style.display = 'block';
+          logoutButton.style.display = 'none';
+        }
+      };
+  
+    // Check authentication state
+    
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+          toggleLoginLogout(true);
+        } else {
+          toggleLoginLogout(false);
+        }
+      });
+    });
+
+    // Logout function
+
+    logoutButton.addEventListener('click', () => {
+        signOut(auth).then(() => {
+            window.location = './login.html';
+        }).catch((error) => {
+            console.log(error);
+        });
+    });
+
+    //distinct periods of the day function
 
 const currentTime = new Date();
 const currentHour = currentTime.getHours();
@@ -12,6 +50,8 @@ const getGreeting = () => {
     else if (currentHour >= 17 && currentHour < 21) return 'Good Evening';
     else return 'Good Night';
 };
+
+// All Blogs Work
 
 const renderAllBlogs = async () => {
     const usersData = (await getDocs(collection(db, "users"))).docs.map(user => user.data());
@@ -58,5 +98,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     await renderAllBlogs();
 });
+
+
+
 
 
