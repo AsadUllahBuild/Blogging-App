@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js';
+import { createUserWithEmailAndPassword , signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js';
 import { auth, db, storage } from './config.js';
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
 import { ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-storage.js';
@@ -11,6 +11,10 @@ const password = document.querySelector('#password');
 const repeatPassword = document.querySelector('#repeat-password');
 const uploadPhoto = document.querySelector('#upload-photo');
 const modal = document.querySelector('#modal');
+const mismatchModal = document.querySelector("#passwordMismatchModal");
+const closeMismatchModal = document.querySelector("#closePasswordMismatchModal");
+const alreadyRegisteredModal = document.querySelector("#alreadyRegisteredModal");
+
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -19,8 +23,23 @@ form.addEventListener('submit', async (event) => {
 
     if (password.value !== repeatPassword.value) {
         console.log('Passwords do not match');
-        
+        mismatchModal.showModal();
+        modal.close();
         return;
+    }
+
+     // Check if the user already exists with the provided email
+     try {
+        const userCredential = await signInWithEmailAndPassword(auth, email.value, password.value);
+        // If signInWithEmailAndPassword is successful, the user already exists
+        console.log('User already registered');
+        // Show modal or perform any action to indicate the user is already registered
+        alreadyRegisteredModal.showModal(); // For example, display a modal
+        modal.close();
+        return;
+    } catch (signInError) {
+        // If signInWithEmailAndPassword fails, it means the user doesn't exist or there's an issue with sign-in
+        // Proceed with user creation
     }
 
     const files = uploadPhoto.files[0];

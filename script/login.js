@@ -22,6 +22,8 @@ form.addEventListener('submit', (event) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             modalMessage.innerHTML = 'Password not correct';
+            console.log('Password not correct');
             my_modal_1.showModal();
+            modal.close();
         });
 });
